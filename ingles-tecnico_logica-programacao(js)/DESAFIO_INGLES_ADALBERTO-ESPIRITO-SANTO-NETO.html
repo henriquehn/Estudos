@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Sprint</title>
+    <meta name="author" content="Adalberto Espirito Santo Neto">
+</head>
+<body>
+    
+<script>
+    let distancia
+    do {
+        distancia = (parseFloat(prompt("Qual a distância percorrida da sua casa até seu trabalho (em km)?")));
+    } while (isNaN(distancia) || distancia <= 0)
+    let consumo
+     do {
+            consumo = parseFloat(prompt("Qual o consumo médio do seu veículo (em km/L)?"))
+    } while (isNaN(consumo) || consumo <= 0);
+
+    var necessidades_litros = distancia / consumo;
+    alert(`O consumo necessário é ${necessidades_litros.toFixed(2)} litros`)
+
+    var postos
+    do {
+        postos = parseInt(prompt("Em quantos postos você pesquisou?"))
+    } while (isNaN(postos) || postos <= 0);
+
+    var lista = []
+
+    var soma_total = 0
+
+    for (let i = 0; i < postos; i++) {
+        do {
+            lista[i] = parseFloat(prompt(`Digite o valor encontrado (em R$) no posto ${i + 1}`))
+        } while (isNaN(lista[i]) || lista[i] <= 0);
+        soma_total = soma_total + lista[i]
+    }
+    let media = soma_total/postos
+    let menor = lista[0]
+    for (let i = 0; i < postos; i++) {
+       if ((lista[i] < menor)) {
+        menor = lista[i]
+       }        
+    }
+    var gasto_diario = 2 * necessidades_litros * menor
+
+    document.write(`
+        O consumo necessário é ${necessidades_litros.toFixed(2)} litros
+        <br/>
+        O menor valor pesquisado é R$${menor.toFixed(2)}
+        <br/>
+        A média dos valores é R$${media.toFixed(2)}
+        <br/>
+        O gasto diário (ida e volta) é R$${gasto_diario.toFixed(2)}
+    `);
+</script>
+
+</body>
+</html>
