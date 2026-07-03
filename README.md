@@ -1,3 +1,5 @@
+# Fork de [Adalberto/Estudo](https://github.com/c13neto/Estudos/tree/desafios-luis-lasid) para orientação no projeto do LaSiD
+
 # 📚 Repositório Central de Estudos
 
 Bem-vindo ao meu repositório central de aprendizado! 
