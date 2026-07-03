@@ -1,59 +1,3 @@
-<!-- Estilo do bloco de código -->
-<style>
-  .wrapper-codigo {
-    position: relative; 
-    border: none; 
-    padding: 0px; 
-    margin: 0px;
-  }
-  .barra-ferramentas {
-    position: absolute; 
-    top: 12px; 
-    right: 12px; 
-    display: flex; 
-    gap: 12px; 
-    z-index: 10;
-  }
-  .btn-minimalista {
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    padding: 2px; 
-    opacity: 0.6; 
-    transition: all 0.2s ease; 
-    display: flex; 
-    align-items: center; 
-    color: var(--vscode-textLink-foreground, currentColor);
-  }
-  .btn-minimalista:hover {
-    opacity: 1; 
-    transform: scale(1.1);
-  }
-</style>
-
-<!-- Lógica de cópia e download -->
-<script>
-  function copiarCodigo(botao) {
-    const container = botao.closest('.wrapper-codigo');
-    const code = container.querySelector('code').innerText;
-    navigator.clipboard.writeText(code);
-    botao.style.opacity = '0.4';
-    setTimeout(() => botao.style.opacity = '', 300);
-  }
-
-  function baixarCodigo(botao, nomeArquivo) {
-    const container = botao.closest('.wrapper-codigo');
-    const code = container.querySelector('code').innerText;
-    const blob = new Blob([code], {type: 'text/plain'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = nomeArquivo;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-</script>
-
 # Comentários sobre a implementação
 ## Questões de legibilidade do código
 ## 1. Padrão de nomenclatura
@@ -74,16 +18,6 @@ Mesmo entidades como Enums e Structs podem ser declaradas em arquivos totalmente
 Para entidades não públicas, que precisam estar aninhadas em uma classe mãe, ainda que não seja possível independência total, é possível deixá-las separadas em arquivos independentes usando classes parciais. Exemplo:
 
 ####  2.1. Exemplo de classe mãe
-<div class="wrapper-codigo">
-  <div class="barra-ferramentas">
-    <button class="btn-minimalista" title="Copiar código" onclick="copiarCodigo(this)">
-      <svg xmlns="http://w3.org" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0-33-23.5-56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>
-    </button>
-    <button class="btn-minimalista" title="Baixar ClasseMae.cs" onclick="baixarCodigo(this, 'ClasseMae.cs')">
-      <svg xmlns="http://w3.org" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M480-320 280-520l56-58 144 144v-366h80v366l144-144 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0-33-23.5-56.5T720-160H240Z"/></svg>
-    </button>
-  </div>
-
 ```csharp
 /// <summary>
 /// Classe principal pública, declarada no arquivo ClasseMae.cs
@@ -96,21 +30,10 @@ namespace ExemploClasseAninhada
     }
 }
 ```
-</div>
 
 A palavra-chave "partial" permite que você possa dividir partes da mesma classe ema arquivos diferentes.
 
 ####  2.2. Exemplo de classe aninhada privada em arquivo separado
-<div class="wrapper-codigo">
-  <div class="barra-ferramentas">
-    <button class="btn-minimalista" title="Copiar código" onclick="copiarCodigo(this)">
-      <svg xmlns="http://w3.org" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0-33-23.5-56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>
-    </button>
-    <button class="btn-minimalista" title="Baixar ClasseMae.cs" onclick="baixarCodigo(this, ' ClasseMae.ClasseAninhada.cs')">
-      <svg xmlns="http://w3.org" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M480-320 280-520l56-58 144 144v-366h80v366l144-144 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0-33-23.5-56.5T720-160H240Z"/></svg>
-    </button>
-  </div>
-
 ```csharp
 /// <summary>
 /// Classe aninhada privada, declarada no arquivo ClasseMae.ClasseAninhada.cs
@@ -126,7 +49,6 @@ namespace ExemploClasseAninhada
     }
 }
 ```
-</div>
 
 ### Observações:
 - Assim como no arquivo principal, os demais arquivos usam a palavra-chave "partial".
